@@ -2,7 +2,11 @@
 	import { T, useFrame } from '@threlte/core';
 	import { interactivity, GLTF } from '@threlte/extras';
 	import { spring } from 'svelte/motion';
+
+	export let url: string;
+
 	interactivity();
+
 	const scale = spring(1);
 	let rotation = 0;
 	useFrame((state, delta) => {
@@ -19,9 +23,7 @@
 />
 <T.DirectionalLight position={[3, 10, 7]} />
 
-<!-- <GLTF
-	url={'https://drive.google.com/file/d/1UtgFVD5Xs8FEr0YJai44wiN5HN-Jj9xe/view?usp=share_link'}
-/> -->
+<GLTF {url} />
 <T.Mesh
 	rotation.y={rotation}
 	position.y={1}
