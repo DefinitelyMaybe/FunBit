@@ -4,10 +4,10 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 -->
 
 <script lang="ts">
-	import type * as THREE from 'three';
+	import * as THREE from 'three';
 	import { Group } from 'three';
 	import { T, type Props, type Events, type Slots, forwardEventHandlers } from '@threlte/core';
-	import { useGltf } from '@threlte/extras';
+	import { useGltf, useTexture } from '@threlte/extras';
 
 	type $$Props = Props<THREE.Group>;
 	type $$Events = Events<THREE.Group>;
@@ -27,17 +27,29 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	};
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/Bush_Small_Flowers.gltf');
+	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Bush_Leaves.png');
+	const texture2 = useTexture('/Ultimate-Stylized-Nature/Textures/Flowers.png').then((texture) => {
+		// Different offsets produce different flowers.
+		texture.offset = new THREE.Vector2(0.41, 0.61);
+		return texture;
+	});
+
+	const assets = Promise.all([gltf, texture1, texture2]);
 
 	const component = forwardEventHandlers();
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
-	{#await gltf}
+	{#await assets}
 		<slot name="fallback" />
-	{:then gltf}
+	{:then [gltf, t1, t2]}
 		<T.Group rotation={[1.12, -0.22, 2.63]}>
-			<T.Mesh geometry={gltf.nodes.Plane000.geometry} material={gltf.materials.Bush_Leaves} />
-			<T.Mesh geometry={gltf.nodes.Plane000_1.geometry} material={gltf.materials.Flowers} />
+			<T.Mesh geometry={gltf.nodes.Plane000.geometry}>
+				<T.MeshStandardMaterial map={t1} alphaTest={0.2} />
+			</T.Mesh>
+			<T.Mesh geometry={gltf.nodes.Plane000_1.geometry}>
+				<T.MeshStandardMaterial map={t2} alphaTest={0.2} />
+			</T.Mesh>
 		</T.Group>
 	{:catch error}
 		<slot name="error" {error} />

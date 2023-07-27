@@ -35,7 +35,15 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	{#await gltf}
 		<slot name="fallback" />
 	{:then gltf}
-		<T.Mesh geometry={gltf.nodes.Cube010.geometry} material={gltf.materials.MapleTree_Bark} />
+		<T.Mesh geometry={gltf.nodes.Cube010.geometry}>
+			<T.MeshStandardMaterial
+				map={t1}
+				map.wrapS={THREE.RepeatWrapping}
+				map.wrapT={THREE.RepeatWrapping}
+				normalMap={n1}
+				normalMap.wrapS={THREE.RepeatWrapping}
+				normalMap.wrapT={THREE.RepeatWrapping} />
+		</T.Mesh>
 		<T.Mesh geometry={gltf.nodes.Cube010_1.geometry} material={gltf.materials.MapleTree_Leaves} />
 	{:catch error}
 		<slot name="error" {error} />

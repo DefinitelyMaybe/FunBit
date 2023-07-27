@@ -1,36 +1,21 @@
 <script lang="ts">
-	import { T, useFrame } from '@threlte/core';
-	import { interactivity, GLTF } from '@threlte/extras';
-	import { spring } from 'svelte/motion';
-
-	export let url: string;
-
-	interactivity();
-
-	const scale = spring(1);
-	let rotation = 0;
-	useFrame((state, delta) => {
-		rotation += delta;
-	});
+	import { T } from '@threlte/core';
+	import { OrbitControls, Grid } from '@threlte/extras';
+	import Thing from '$lib/components/models/Ultimate-Stylized-Nature/DeadTree_10.svelte';
 </script>
 
-<T.PerspectiveCamera
-	makeDefault
-	position={[10, 10, 10]}
-	on:create={({ ref }) => {
-		ref.lookAt(0, 1, 0);
-	}}
-/>
-<T.DirectionalLight position={[3, 10, 7]} />
+<T.PerspectiveCamera makeDefault position={[10, 10, 10]}>
+	<OrbitControls />
+</T.PerspectiveCamera>
 
-<GLTF {url} />
-<T.Mesh
-	rotation.y={rotation}
-	position.y={1}
-	scale={$scale}
-	on:pointerenter={() => scale.set(1.5)}
-	on:pointerleave={() => scale.set(1)}
->
-	<T.BoxGeometry args={[1, 2, 1]} />
-	<T.MeshStandardMaterial color="hotpink" />
-</T.Mesh>
+<T.DirectionalLight position={[3, 10, 7]} />
+<T.AmbientLight />
+
+{#each new Array(50) as _}
+	{@const x = Math.random() * 20 - 10}
+	{@const z = Math.random() * 20 - 10}
+	{@const rot = Math.random() * Math.PI * 2}
+	{@const scale = Math.random() * 0.5 + 1}
+	<Thing position={[x, 0, z]} rotation.y={rot} {scale} />
+{/each}
+<Grid sectionColor={'#000'} />
