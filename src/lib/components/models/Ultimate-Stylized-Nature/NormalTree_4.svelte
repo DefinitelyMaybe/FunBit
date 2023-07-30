@@ -4,10 +4,10 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 -->
 
 <script lang="ts">
-	import type * as THREE from 'three';
+	import * as THREE from 'three';
 	import { Group } from 'three';
 	import { T, type Props, type Events, type Slots, forwardEventHandlers } from '@threlte/core';
-	import { useGltf } from '@threlte/extras';
+	import { useGltf, useTexture } from '@threlte/extras';
 
 	type $$Props = Props<THREE.Group>;
 	type $$Events = Events<THREE.Group>;
@@ -27,14 +27,19 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	};
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/NormalTree_4.gltf');
+	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/NormalTree_Bark.png');
+	const normalMap1 = useTexture('/Ultimate-Stylized-Nature/Textures/NormalTree_Bark_Normal.png');
+	const texture2 = useTexture('/Ultimate-Stylized-Nature/Textures/NormalTree_Leaves.png');
+
+	const assets = Promise.all([gltf, texture1, normalMap1, texture2]);
 
 	const component = forwardEventHandlers();
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
-	{#await gltf}
+	{#await assets}
 		<slot name="fallback" />
-	{:then gltf}
+	{:then [gltf, t1, n1, t2]}
 		<T.Mesh geometry={gltf.nodes.Cube001.geometry}>
 			<T.MeshStandardMaterial
 				map={t1}
@@ -44,7 +49,9 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 				normalMap.wrapS={THREE.RepeatWrapping}
 				normalMap.wrapT={THREE.RepeatWrapping} />
 		</T.Mesh>
-		<T.Mesh geometry={gltf.nodes.Cube001_1.geometry} material={gltf.materials.NormalTree_Leaves} />
+		<T.Mesh geometry={gltf.nodes.Cube001_1.geometry}>
+			<T.MeshStandardMaterial map={t2} side={THREE.DoubleSide} alphaTest={0.5} />
+		</T.Mesh>
 	{:catch error}
 		<slot name="error" {error} />
 	{/await}

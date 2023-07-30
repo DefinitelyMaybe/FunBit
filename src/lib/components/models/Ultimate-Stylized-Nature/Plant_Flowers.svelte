@@ -30,14 +30,13 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
-	{#await gltf}
+	{#await assets}
 		<slot name="fallback" />
-	{:then gltf}
+	{:then [gltf, t1]}
 		<T.Mesh
 			geometry={gltf.nodes.Plant_Flowers.geometry}
 			material={gltf.materials.Flowers}
-			rotation={[0.21, 0, 0]}
-		/>
+			rotation={[0.21, 0, 0]} />
 	{:catch error}
 		<slot name="error" {error} />
 	{/await}

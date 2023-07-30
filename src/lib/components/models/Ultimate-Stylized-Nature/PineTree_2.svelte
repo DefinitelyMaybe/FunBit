@@ -4,10 +4,10 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 -->
 
 <script lang="ts">
-	import type * as THREE from 'three';
+	import * as THREE from 'three';
 	import { Group } from 'three';
 	import { T, type Props, type Events, type Slots, forwardEventHandlers } from '@threlte/core';
-	import { useGltf } from '@threlte/extras';
+	import { useGltf, useTexture } from '@threlte/extras';
 
 	type $$Props = Props<THREE.Group>;
 	type $$Events = Events<THREE.Group>;
@@ -32,9 +32,9 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 </script>
 
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
-	{#await gltf}
+	{#await assets}
 		<slot name="fallback" />
-	{:then gltf}
+	{:then [gltf, t1, n1, t2]}
 		<T.Mesh geometry={gltf.nodes.Cube004.geometry} material={gltf.materials.PineTree_Bark} />
 		<T.Mesh geometry={gltf.nodes.Cube004_1.geometry} material={gltf.materials.PineTree_Leaves} />
 	{:catch error}
