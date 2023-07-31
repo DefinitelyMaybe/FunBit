@@ -37,7 +37,16 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 		<slot name="fallback" />
 	{:then [gltf, t1]}
 		<T.Mesh geometry={gltf.nodes.Petals_2.geometry} rotation={[2, -0.53, -1.01]}>
-			<T.MeshStandardMaterial map={t1} map.flipY={false} side={THREE.DoubleSide} alphaTest={0.5} />
+			<T.MeshStandardMaterial side={THREE.DoubleSide} alphaTest={0.5}>
+				<T
+					is={t1}
+					attach="map"
+					offset={[0, 0]}
+					on:create={({ ref }) => {
+						console.log(ref.center);
+						console.log(ref.offset);
+					}} />
+			</T.MeshStandardMaterial>
 		</T.Mesh>
 	{:catch error}
 		<slot name="error" {error} />

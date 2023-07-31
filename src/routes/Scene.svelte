@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { T } from '@threlte/core';
 	import { OrbitControls, Grid } from '@threlte/extras';
-	import Thing from '$lib/components/models/Ultimate-Stylized-Nature/Petals_4.svelte';
+	import Thing from '$lib/components/models/Ultimate-Stylized-Nature/Rock_5.svelte';
 </script>
 
 <T.PerspectiveCamera makeDefault position={[10, 10, 10]}>
@@ -19,4 +19,6 @@
 	<Thing position={[x, 0, z]} rotation.y={rot} {scale} />
 {/each} -->
 <Thing />
+<!-- <Thing2 position={[1, 0, 1]} /> -->
+<!-- <Thing position={[1, 0, 1]} /> -->
 <Grid sectionColor={'#000'} />

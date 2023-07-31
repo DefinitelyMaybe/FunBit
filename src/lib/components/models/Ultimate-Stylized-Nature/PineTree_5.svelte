@@ -27,6 +27,11 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	};
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/PineTree_5.gltf');
+	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/PineTree_Bark.png');
+	const normalMap1 = useTexture('/Ultimate-Stylized-Nature/Textures/PineTree_Bark_Normal.png');
+	const texture2 = useTexture('/Ultimate-Stylized-Nature/Textures/PineTree_Leaves.png');
+
+	const assets = Promise.all([gltf, texture1, normalMap1, texture2]);
 
 	const component = forwardEventHandlers();
 </script>
@@ -35,8 +40,18 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	{#await assets}
 		<slot name="fallback" />
 	{:then [gltf, t1, n1, t2]}
-		<T.Mesh geometry={gltf.nodes.Cube011.geometry} material={gltf.materials.PineTree_Bark} />
-		<T.Mesh geometry={gltf.nodes.Cube011_1.geometry} material={gltf.materials.PineTree_Leaves} />
+		<T.Mesh geometry={gltf.nodes.Cube011.geometry}>
+			<T.MeshStandardMaterial
+				map={t1}
+				map.wrapS={THREE.RepeatWrapping}
+				map.wrapT={THREE.RepeatWrapping}
+				normalMap={n1}
+				normalMap.wrapS={THREE.RepeatWrapping}
+				normalMap.wrapT={THREE.RepeatWrapping} />
+		</T.Mesh>
+		<T.Mesh geometry={gltf.nodes.Cube011_1.geometry}>
+			<T.MeshStandardMaterial map={t2} map.flipY={false} side={THREE.DoubleSide} alphaTest={0.5} />
+		</T.Mesh>
 	{:catch error}
 		<slot name="error" {error} />
 	{/await}

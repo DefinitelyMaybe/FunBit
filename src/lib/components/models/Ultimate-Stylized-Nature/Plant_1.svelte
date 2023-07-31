@@ -4,7 +4,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 -->
 
 <script lang="ts">
-	import type * as THREE from 'three';
+	import * as THREE from 'three';
 	import { Group } from 'three';
 	import { T, type Props, type Events, type Slots, forwardEventHandlers } from '@threlte/core';
 	import { useGltf, useTexture } from '@threlte/extras';
@@ -25,7 +25,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	};
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/Plant_1.gltf');
-	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/PalmTree_Leaves.png');
+	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Flowers.png');
 
 	const assets = Promise.all([gltf, texture1]);
 
@@ -36,10 +36,11 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	{#await assets}
 		<slot name="fallback" />
 	{:then [gltf, t1]}
-		<T.Mesh
-			geometry={gltf.nodes.Plant_1.geometry}
-			material={gltf.materials.Flowers}
-			rotation={[0.35, 0.25, -0.09]} />
+		<T.Mesh geometry={gltf.nodes.Plant_1.geometry} rotation={[0.35, 0.25, -0.09]}>
+			<T.MeshStandardMaterial side={THREE.DoubleSide} alphaTest={0.5}>
+				<T is={t1} attach="map" offset={[0, -0.8]} />
+			</T.MeshStandardMaterial>
+		</T.Mesh>
 	{:catch error}
 		<slot name="error" {error} />
 	{/await}
