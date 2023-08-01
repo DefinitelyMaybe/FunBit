@@ -26,9 +26,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/Petals_3.gltf');
 	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Flowers.png').then((texture) => {
-		// Different offsets produce different flowers.
-		texture.offset = new THREE.Vector2(0, 0.21);
-		return texture;
+		return texture.clone();
 	});
 
 	const assets = Promise.all([gltf, texture1]);
@@ -41,7 +39,9 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 		<slot name="fallback" />
 	{:then [gltf, t1]}
 		<T.Mesh geometry={gltf.nodes.Petals_3.geometry} rotation={[2.26, -0.53, -1.01]}>
-			<T.MeshStandardMaterial map={t1} side={THREE.DoubleSide} alphaTest={0.5} />
+			<T.MeshStandardMaterial side={THREE.DoubleSide} alphaTest={0.5}>
+				<T is={t1} attach="map" offset={[0, 0.2]} />
+			</T.MeshStandardMaterial>
 		</T.Mesh>
 	{:catch error}
 		<slot name="error" {error} />

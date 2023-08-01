@@ -25,7 +25,9 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	};
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/Petals_2.gltf');
-	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Flowers.png');
+	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Flowers.png').then((val) => {
+		return val.clone();
+	});
 
 	const assets = Promise.all([gltf, texture1]);
 
@@ -38,14 +40,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	{:then [gltf, t1]}
 		<T.Mesh geometry={gltf.nodes.Petals_2.geometry} rotation={[2, -0.53, -1.01]}>
 			<T.MeshStandardMaterial side={THREE.DoubleSide} alphaTest={0.5}>
-				<T
-					is={t1}
-					attach="map"
-					offset={[0, 0]}
-					on:create={({ ref }) => {
-						console.log(ref.center);
-						console.log(ref.offset);
-					}} />
+				<T is={t1} attach="map" offset={[0, 0.2]} />
 			</T.MeshStandardMaterial>
 		</T.Mesh>
 	{:catch error}

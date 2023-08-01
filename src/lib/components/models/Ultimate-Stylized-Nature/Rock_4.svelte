@@ -4,7 +4,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 -->
 
 <script lang="ts">
-	import * as THREE from 'three';
+	import type * as THREE from 'three';
 	import { Group } from 'three';
 	import { T, type Props, type Events, type Slots, forwardEventHandlers } from '@threlte/core';
 	import { useGltf, useTexture } from '@threlte/extras';
@@ -25,7 +25,9 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	};
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/Rock_4.gltf');
-	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Rocks.png');
+	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Rocks.png').then((val) => {
+		return val.clone();
+	});
 
 	const assets = Promise.all([gltf, texture1]);
 
@@ -37,7 +39,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 		<slot name="fallback" />
 	{:then [gltf, t1]}
 		<T.Mesh geometry={gltf.nodes.Rock_4.geometry}>
-			<T.MeshStandardMaterial map={t1} side={THREE.DoubleSide} />
+			<T.MeshStandardMaterial map={t1} map.offset={[0.1, 0.4]} />
 		</T.Mesh>
 	{:catch error}
 		<slot name="error" {error} />

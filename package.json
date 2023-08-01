@@ -21,7 +21,7 @@
 		"@threlte/core": "next",
 		"@threlte/extras": "next",
 		"@threlte/rapier": "next",
-		"@threlte/theatre": "next",
+		"@threlte/theatre": "^1.0.0",
 		"@types/three": "^0.152.1",
 		"autoprefixer": "^10.4.14",
 		"postcss": "^8.4.24",

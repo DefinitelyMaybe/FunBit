@@ -25,7 +25,9 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	};
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/Rock_3.gltf');
-	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Rocks.png');
+	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Rocks.png').then((val) => {
+		return val.clone();
+	});
 
 	const assets = Promise.all([gltf, texture1]);
 
@@ -37,7 +39,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 		<slot name="fallback" />
 	{:then [gltf, t1]}
 		<T.Mesh geometry={gltf.nodes.Rock_3.geometry}>
-			<T.MeshStandardMaterial map={t1} side={THREE.DoubleSide} />
+			<T.MeshStandardMaterial map={t1} map.offset={[0, 0.6]} side={THREE.DoubleSide} />
 		</T.Mesh>
 	{:catch error}
 		<slot name="error" {error} />
