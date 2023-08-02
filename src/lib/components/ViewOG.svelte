@@ -13,7 +13,7 @@
 
 <script lang="ts">
 	export let number: number;
-	export const scene = new THREE.Scene();
+	export let scene: THREE.Scene;
 	let el: HTMLElement | undefined;
 
 	const camera = new THREE.PerspectiveCamera(50, 1, 1, 10);
