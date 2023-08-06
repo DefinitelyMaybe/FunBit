@@ -58,6 +58,7 @@ function sortTree(tree: Folder) {
 }
 
 const dirPath = './static/';
+// const dirPath = './src/lib/components/models';
 const tree = await generateTree(dirPath);
 sortTree(tree);
 const json = JSON.stringify(tree, null, 2);
