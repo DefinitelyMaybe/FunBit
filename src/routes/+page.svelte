@@ -1,32 +1,42 @@
 <script lang="ts">
+	import '../app.css';
 	import { Canvas } from '@threlte/core';
 	import Scene from './Scene.svelte';
-	import Scene3 from './Scene3.svelte';
 	import View from '../lib/components/View.svelte';
-	import '../app.css';
-	import Folder from './Folder.svelte';
-	import tree from './static-data.json';
-	// TODO-DefinitelyMaybe: Add link back to quaternius website
 
-	let el;
-	let el2;
+	import MainObject from '$lib/components/models/Ultimate-Stylized-Nature/BirchTree_1.svelte';
+
+	const groups: { el: HTMLElement | undefined; obj: any }[] = [];
+
+	for (let i = 0; i < Array(10).length; i++) {
+		groups.push({
+			el: undefined,
+			obj: MainObject
+		});
+	}
 </script>
 
-<!-- <div class="min-h-screen relative">
+<div class="min-h-screen relative">
 	<div class="absolute w-full h-full">
-		<div bind:this={el} class="absolute w-[200px] h-[200px]" />
-		<div bind:this={el2} class="absolute left-[200px] w-[200px] h-[200px]" />
+		<a href="https://quaternius.com/" class="text-9xl underline text-blue-400">Quaternius assets</a>
+		<div class="grid grid-cols-3 h-full">
+			{#each groups as group}
+				<div class="relative">
+					<div bind:this={group['el']} class="w-full h-full" />
+				</div>
+			{/each}
+		</div>
 	</div>
-	<div class="absolute w-full h-full z-[-1]">
+	<div class="fixed w-full h-full z-[-1]">
 		<Canvas>
-			<View element={el}>
-				<Scene element={el} />
-			</View>
-			<View element={el2}>
-				<Scene3 element={el2} />
-			</View>
+			{#each groups as group}
+				<View element={group.el}>
+					<Scene element={group.el}>
+						<MainObject />
+					</Scene>
+				</View>
+			{/each}
 		</Canvas>
 	</div>
-</div> -->
-<div class="text-9xl">Quaternius assets</div>
-<Folder name="" contents={tree.contents} expanded />
+</div>
+<!-- <Folder name="" contents={tree.contents} expanded /> -->
