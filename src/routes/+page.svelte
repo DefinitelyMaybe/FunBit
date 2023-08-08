@@ -2,9 +2,11 @@
 	import '../app.css';
 	import { Canvas } from '@threlte/core';
 	import Scene from './Scene.svelte';
-	import View from '../lib/components/View.svelte';
+	import View from './View.svelte';
+	import Copy from './Copy.svelte';
 
 	import MainObject from '$lib/components/models/Ultimate-Stylized-Nature/BirchTree_1.svelte';
+	import MainObjectSrc from '$lib/components/models/Ultimate-Stylized-Nature/BirchTree_1.svelte?raw';
 
 	const groups: { el: HTMLElement | undefined; obj: any }[] = [];
 
@@ -19,10 +21,13 @@
 <div class="min-h-screen relative">
 	<div class="absolute w-full h-full">
 		<a href="https://quaternius.com/" class="text-9xl underline text-blue-400">Quaternius assets</a>
-		<div class="grid grid-cols-3 h-full">
+		<div class="grid grid-cols-3 h-full gap-4">
 			{#each groups as group}
-				<div class="relative">
-					<div bind:this={group['el']} class="w-full h-full" />
+				<div class="relative bg-black/10">
+					<div bind:this={group['el']} class="absolute w-full h-full" />
+					<div class="">
+						<Copy name="hello" url="" />
+					</div>
 				</div>
 			{/each}
 		</div>
