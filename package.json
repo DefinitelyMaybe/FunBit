@@ -19,7 +19,7 @@
 		"@theatre/core": "^0.6.1",
 		"@theatre/studio": "^0.6.1",
 		"@threlte/core": "^6.0.0",
-		"@threlte/extras": "^5.0.1",
+		"@threlte/extras": "^5.3.0",
 		"@threlte/rapier": "^1.0.1",
 		"@threlte/theatre": "^1.0.1",
 		"@types/three": "^0.152.1",
