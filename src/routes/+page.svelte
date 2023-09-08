@@ -8,11 +8,12 @@
 </script>
 
 <div class="min-h-screen relative">
-	<div class="absolute w-full h-full">
-		<a href="https://quaternius.com/" class="text-9xl underline text-blue-400">Quaternius assets</a>
+	<div class="absolute flex flex-col w-full h-full">
+		<a href="https://quaternius.com/" class="text-9xl underline text-blue-400 py-4"
+			>Quaternius assets</a>
 		<div class="grid grid-cols-3 h-full gap-4">
 			{#each Groups as group}
-				<div class="relative">
+				<div class="relative min-h-[300px]">
 					<div class="">
 						<Copy src={group.src} />
 					</div>
