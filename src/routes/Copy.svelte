@@ -13,12 +13,13 @@
 
 <div class="flex items-center">
 	<button
-		class="p-2 pointer-events-auto z-[1]"
+		class="flex p-2 pointer-events-auto z-[1]"
 		on:click={() => {
 			clicked = true;
 			navigator.clipboard.writeText(src);
 			setTimeout(() => (clicked = false), 500);
 		}}>
+		Copy
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			fill="none"

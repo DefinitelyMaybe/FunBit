@@ -4,6 +4,7 @@
 	import Scene from './Scene.svelte';
 	import View from './View.svelte';
 	import Copy from './Copy.svelte';
+	import Download from './Download.svelte';
 	import Groups from './ObjectsArray';
 </script>
 
@@ -14,8 +15,13 @@
 		<div class="grid grid-cols-3 h-full gap-4">
 			{#each Groups as group}
 				<div class="relative min-h-[300px]">
-					<div class="">
-						<Copy src={group.src} />
+					<div class="flex">
+						<div class="bg-white rounded-lg">
+							<div class="flex">
+								<Copy src={group.src} />
+								<Download />
+							</div>
+						</div>
 					</div>
 					<div bind:this={group['el']} class="absolute top-0 left-0 w-full h-full" />
 				</div>
