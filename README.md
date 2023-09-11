@@ -10,6 +10,8 @@ A bunch of assets that people can use for threlte projects
     - sizes
       - OG + 1024x1024
 - asset preview
+  - Load each gltf incrementally
+  - Separate out asset collections
 - copy asset url to clipboard
   - Could make React exports as well
 - copy @threlte/gltf output/`model.svelte` contents
