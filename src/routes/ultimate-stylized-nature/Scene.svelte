@@ -10,7 +10,9 @@
 </script>
 
 <T.PerspectiveCamera makeDefault position={[5, 5, 5]}>
-	<T is={OrbitControls} args={[camera.current, element]} maxPolarAngle={1.55} />
+	{#if element}
+		<T is={OrbitControls} args={[camera.current, element]} maxPolarAngle={1.55} />
+	{/if}
 </T.PerspectiveCamera>
 
 <T.DirectionalLight position={[1, 1, 1]} />

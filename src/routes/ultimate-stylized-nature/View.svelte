@@ -86,6 +86,7 @@
 	useFrame(() => {});
 
 	useRender(({ renderer }) => {
+		if (!element) return;
 		const {
 			position: { left, bottom, width, height },
 			isOffscreen

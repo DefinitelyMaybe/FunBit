@@ -3,13 +3,13 @@
 	import Scene from './Scene.svelte';
 	import View from './View.svelte';
 	import Copy from './Copy.svelte';
-	import Download from './Download.svelte';
 	import Groups from './ObjectsArray';
 	import InfiniteScroll from '$lib/components/infiniteScroll.svelte';
 
 	// grab the first 10 objects
 	let index = 10;
 	let visibleGroups = Groups.slice(0, 10);
+	let doneLoading = false;
 </script>
 
 <div class="min-h-screen relative">
@@ -21,23 +21,30 @@
 						<div class="bg-white rounded-lg">
 							<div class="flex">
 								<Copy src={group.src} />
-								<Download />
 							</div>
 						</div>
 					</div>
 					<div bind:this={group['el']} class="absolute top-0 left-0 w-full h-full" />
 				</div>
 			{/each}
-			<InfiniteScroll
-				on:load={() => {
-					if (index < Groups.length) {
-						console.log('loading more objects');
-						visibleGroups = [...visibleGroups, ...Groups.slice(index, index + 10)];
-						index += 10;
-					} else {
-						console.log('loaded all objects');
-					}
-				}} />
+			{#if !doneLoading}
+				<div class="relative min-h-[300px]">
+					<div class="flex">
+						<div class="bg-grey rounded-lg">
+							<div class="flex" />
+							<InfiniteScroll
+								on:load={() => {
+									if (index < Groups.length) {
+										visibleGroups = [...visibleGroups, ...Groups.slice(index, index + 10)];
+										index += 10;
+									} else {
+										doneLoading = true;
+									}
+								}} />
+						</div>
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 	<div class="fixed w-full h-full top-0 left-0 z-[-1]">
