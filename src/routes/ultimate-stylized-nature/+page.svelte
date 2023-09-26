@@ -5,12 +5,17 @@
 	import Copy from './Copy.svelte';
 	import Download from './Download.svelte';
 	import Groups from './ObjectsArray';
+	import InfiniteScroll from '$lib/components/infiniteScroll.svelte';
+
+	// grab the first 10 objects
+	let index = 10;
+	let visibleGroups = Groups.slice(0, 10);
 </script>
 
 <div class="min-h-screen relative">
 	<div class="absolute flex flex-col w-full h-full">
-		<div class="grid grid-cols-3 h-full gap-4">
-			{#each Groups as group}
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full gap-4">
+			{#each visibleGroups as group, i}
 				<div class="relative min-h-[300px]">
 					<div class="flex">
 						<div class="bg-white rounded-lg">
@@ -23,11 +28,21 @@
 					<div bind:this={group['el']} class="absolute top-0 left-0 w-full h-full" />
 				</div>
 			{/each}
+			<InfiniteScroll
+				on:load={() => {
+					if (index < Groups.length) {
+						console.log('loading more objects');
+						visibleGroups = [...visibleGroups, ...Groups.slice(index, index + 10)];
+						index += 10;
+					} else {
+						console.log('loaded all objects');
+					}
+				}} />
 		</div>
 	</div>
-	<div class="fixed w-full h-full z-[-1]">
+	<div class="fixed w-full h-full top-0 left-0 z-[-1]">
 		<Canvas>
-			{#each Groups as group}
+			{#each visibleGroups as group, i}
 				<View element={group.el}>
 					<Scene element={group.el}>
 						<svelte:component this={group.obj} />

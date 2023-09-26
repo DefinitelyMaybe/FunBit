@@ -2,6 +2,7 @@
 	import { T, useThrelte } from '@threlte/core';
 	import { Grid } from '@threlte/extras';
 	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+	import Bounds from '$lib/components/Bounds.svelte';
 
 	export let element: HTMLElement;
 
@@ -15,6 +16,8 @@
 <T.DirectionalLight position={[1, 1, 1]} />
 <T.AmbientLight />
 
-<slot />
+<Bounds>
+	<slot />
+</Bounds>
 
 <Grid sectionColor={'#666'} infiniteGrid />
