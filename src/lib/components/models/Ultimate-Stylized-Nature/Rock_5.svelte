@@ -7,7 +7,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	import type * as THREE from 'three';
 	import { Group } from 'three';
 	import { T, type Props, type Events, type Slots, forwardEventHandlers } from '@threlte/core';
-	import { useGltf, useTexture } from '@threlte/extras';
+	import { useGltf } from '@threlte/extras';
 
 	type $$Props = Props<THREE.Group>;
 	type $$Events = Events<THREE.Group>;
@@ -25,11 +25,8 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	};
 
 	const gltf = useGltf<GLTFResult>('/Ultimate-Stylized-Nature/Rock_5.gltf');
-	const texture1 = useTexture('/Ultimate-Stylized-Nature/Textures/Rocks.png').then((val) => {
-		return val.clone();
-	});
 
-	const assets = Promise.all([gltf, texture1]);
+	const assets = Promise.all([gltf]);
 
 	const component = forwardEventHandlers();
 </script>
@@ -37,9 +34,9 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 <T is={ref} dispose={false} {...$$restProps} bind:this={$component}>
 	{#await assets}
 		<slot name="fallback" />
-	{:then [gltf, t1]}
+	{:then [gltf]}
 		<T.Mesh geometry={gltf.nodes.Rock_5.geometry}>
-			<T.MeshStandardMaterial map={t1} map.offset={[0, 0]} />
+			<T.MeshStandardMaterial color="grey" />
 		</T.Mesh>
 	{:catch error}
 		<slot name="error" {error} />
