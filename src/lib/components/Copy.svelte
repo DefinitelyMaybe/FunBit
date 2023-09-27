@@ -9,9 +9,9 @@
 	$: if (mounted && src != '') {
 		src = src.replaceAll(
 			/useGltf\<GLTFResult\>\('\//g,
-			`useGltf<GLTFResult>('${window.location.origin}`
+			`useGltf<GLTFResult>('${window.location.origin}/`
 		);
-		src = src.replaceAll(/useTexture\('\//g, `useTexture('${window.location.origin}`);
+		src = src.replaceAll(/useTexture\('\//g, `useTexture('${window.location.origin}/`);
 	}
 
 	onMount(() => {
