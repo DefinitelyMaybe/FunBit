@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { Canvas } from '@threlte/core';
 	import Scene from './Scene.svelte';
-	import View from './View.svelte';
-	import Copy from './Copy.svelte';
+	import View from '$lib/components/View.svelte';
+	import Copy from '$lib/components/Copy.svelte';
 	import Groups from './ObjectsArray';
 	import InfiniteScroll from '$lib/components/infiniteScroll.svelte';
 

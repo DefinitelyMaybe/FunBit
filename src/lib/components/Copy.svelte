@@ -1,14 +1,19 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { onMount } from 'svelte';
 
 	export let src: string;
 
+	let mounted = false;
 	let clicked = false;
 
-	if (browser) {
+	$: if (mounted && src != '') {
 		src = src.replaceAll(/useGltf\<GLTFResult\>\('\//g, `useGltf<GLTFResult>('${window.location}`);
 		src = src.replaceAll(/useTexture\('\//g, `useTexture('${window.location}`);
 	}
+
+	onMount(() => {
+		mounted = true;
+	});
 </script>
 
 <div class="flex items-center">
