@@ -7,8 +7,11 @@
 	let clicked = false;
 
 	$: if (mounted && src != '') {
-		src = src.replaceAll(/useGltf\<GLTFResult\>\('\//g, `useGltf<GLTFResult>('${window.location}`);
-		src = src.replaceAll(/useTexture\('\//g, `useTexture('${window.location}`);
+		src = src.replaceAll(
+			/useGltf\<GLTFResult\>\('\//g,
+			`useGltf<GLTFResult>('${window.location.origin}`
+		);
+		src = src.replaceAll(/useTexture\('\//g, `useTexture('${window.location.origin}`);
 	}
 
 	onMount(() => {
