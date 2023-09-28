@@ -139,11 +139,11 @@
 	<slot />
 </T>
 
-<T.Mesh position={center}>
+<!-- <T.Mesh position={center}>
 	<T.SphereGeometry args={[1, 32, 16]} />
 	<T.MeshBasicMaterial color={'red'} />
 </T.Mesh>
 
 <T is={box} let:ref>
 	<T.Box3Helper args={[ref, 0xff0000]} />
-</T>
+</T> -->
