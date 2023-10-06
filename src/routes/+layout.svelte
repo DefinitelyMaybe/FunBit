@@ -5,8 +5,8 @@
 <nav class="bg-gray-500 h-32 flex justify-between items-center z-[2]">
 	<a href="https://definitelymaybe.github.io/" class="flex ml-8">
 		<img src="/github-mark.png" alt="" class="h-12" /></a>
-	<a href="/" class="flex flex-col">
-		<h1 class="text-5xl font-medium">FunBit</h1>
+	<a href="/" class="flex flex-col items-center">
+		<h1 class="text-5xl font-medium">Quaternius GLTF Clone</h1>
 		<p class="text-xs">A remix for threlte projects</p>
 	</a>
 	<div class="flex flex-col items-center mr-8">
