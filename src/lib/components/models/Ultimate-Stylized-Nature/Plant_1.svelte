@@ -38,7 +38,7 @@ Command: npx @threlte/gltf@1.0.0-next.13 C:\Users\Aaron\Documents\FunBit\static\
 	{:then [gltf, t1]}
 		<T.Mesh geometry={gltf.nodes.Plant_1.geometry} rotation={[0.35, 0.25, -0.09]}>
 			<T.MeshStandardMaterial side={THREE.DoubleSide} alphaTest={0.5}>
-				<T is={t1} attach="map" offset={[0, -0.8]} />
+				<T is={t1.clone()} attach="map" offset={[0, -0.8]} />
 			</T.MeshStandardMaterial>
 		</T.Mesh>
 	{:catch error}
