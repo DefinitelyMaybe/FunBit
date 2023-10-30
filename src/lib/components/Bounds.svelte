@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type * as THREE from 'three';
-	import { T, useThrelte, useThrelteUserContext } from '@threlte/core';
+	import { T, useThrelte, useThrelteUserContext, useFrame } from '@threlte/core';
 	import { Group, Box3, Vector3, MathUtils } from 'three';
 	import { onMount } from 'svelte';
 
@@ -28,7 +28,7 @@
 
 	const { camera, invalidate } = useThrelte();
 	const userCtx = useThrelteUserContext();
-	const controls = $userCtx['threlte-controls']?.orbitControls;
+	const controls = $userCtx['threlte-controls']()?.orbitControls;
 
 	const container = new Group();
 	const box = new Box3();
@@ -50,12 +50,6 @@
 		focus: new Vector3(),
 		camera: new Vector3(),
 		zoom: 1
-	};
-
-	const updateCenter = () => {
-		let x = api.getSize();
-		center = x.center.toArray();
-		console.log(center);
 	};
 
 	function equals(a: { x: number; y: number; z: number }, b: { x: number; y: number; z: number }) {
@@ -91,7 +85,7 @@
 		if (isBox3(object)) box.copy(object);
 		else {
 			const target = object || container;
-			if (!target) return; //this;
+			if (!target) return api;
 			target.updateWorldMatrix(true, true);
 			box.setFromObject(target);
 		}
@@ -112,8 +106,8 @@
 			$camera.position.copy(newPos);
 		}
 
-		updateCenter();
-		return; //this;
+		center = box.getCenter(new Vector3()).toArray();
+		return api;
 	}
 
 	function clipCamera() {
@@ -124,7 +118,7 @@
 		$camera.updateProjectionMatrix();
 		if ($controls) $controls.update();
 		invalidate();
-		return; //this;
+		return api;
 	}
 
 	function to({
@@ -150,7 +144,7 @@
 			$camera.position.set(...position);
 		}
 
-		return; //this;
+		return api;
 	}
 
 	function fitView() {
@@ -208,16 +202,43 @@
 		}
 		if (onFit) onFit(getSize());
 		invalidate();
-		return; //this;
+		return api;
 	}
 
-	onMount(() => {
-		if ($controls) {
-			// Try to prevent drag hijacking
-			const callback = () => (current.animating = false);
-			$controls.addEventListener('start', callback);
-			return () => $controls.removeEventListener('start', callback);
+	useFrame((_, delta) => {
+		if (current.animating) {
+			damp(current.focus, goal.focus, damping, delta);
+			damp(current.camera, goal.camera, damping, delta);
+			current.zoom = MathUtils.damp(current.zoom, goal.zoom, damping, delta);
+			$camera.position.copy(current.camera);
+
+			if (isOrthographic($camera)) {
+				$camera.zoom = current.zoom;
+				$camera.updateProjectionMatrix();
+			}
+
+			if (!$controls) {
+				$camera.lookAt(current.focus);
+			} else {
+				$controls.target.copy(current.focus);
+				$controls.update();
+			}
+
+			invalidate();
+			if (isOrthographic($camera) && !(Math.abs(current.zoom - goal.zoom) < eps)) return;
+			if (!isOrthographic($camera) && !equals(current.camera, goal.camera)) return;
+			if ($controls && !equals(current.focus, goal.focus)) return;
+			current.animating = false;
 		}
+	});
+
+	onMount(() => {
+		// if ($controls) {
+		// 	// Try to prevent drag hijacking
+		// 	const callback = () => (current.animating = false);
+		// 	$controls.addEventListener('start', callback);
+		// 	// return () => $controls.removeEventListener('start', callback);
+		// }
 		if (observe || count++ === 0) {
 			api.refresh();
 			if (fit) api.fit();
@@ -229,10 +250,3 @@
 <T is={container}>
 	<slot />
 </T>
-<!-- 
-<T.Mesh position={center}>
-	<T.SphereGeometry args={[0.2, 32, 16]} />
-	<T.MeshBasicMaterial color={'red'} />
-</T.Mesh>
-
-<T.Box3Helper args={[box, 0xff0000]} /> -->

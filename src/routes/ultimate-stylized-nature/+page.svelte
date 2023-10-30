@@ -15,7 +15,7 @@
 <div class="min-h-screen relative">
 	<div class="absolute flex flex-col w-full h-full">
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full gap-4">
-			{#each visibleGroups as group, i}
+			{#each visibleGroups as group (group.src)}
 				<div class="relative min-h-[300px]">
 					<div class="flex">
 						<div class="bg-white rounded-lg">
@@ -37,6 +37,11 @@
 									if (index < Groups.length) {
 										visibleGroups = [...visibleGroups, ...Groups.slice(index, index + 10)];
 										index += 10;
+										for (let i = 0; i < visibleGroups.length; i++) {
+											if (visibleGroups[i]?.callAPI) {
+												visibleGroups[i]?.callAPI();
+											}
+										}
 									} else {
 										doneLoading = true;
 									}
@@ -51,7 +56,7 @@
 		<Canvas>
 			{#each visibleGroups as group, i}
 				<View element={group.el}>
-					<Scene element={group.el}>
+					<Scene element={group.el} bind:callAPI={group.callAPI}>
 						<svelte:component this={group.obj} />
 					</Scene>
 				</View>
