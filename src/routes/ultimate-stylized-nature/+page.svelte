@@ -5,26 +5,46 @@
 	import Copy from '$lib/components/Copy.svelte';
 	import Groups from './ObjectsArray';
 	import InfiniteScroll from '$lib/components/infiniteScroll.svelte';
+	import { Switch } from '$lib/components/ui/switch';
 
 	// grab the first 10 objects
 	let index = 10;
 	let visibleGroups = Groups.slice(0, 10);
 	let doneLoading = false;
+	let rotatingObjects: number[] = [];
 </script>
 
 <div class="min-h-screen relative">
 	<div class="absolute flex flex-col w-full h-full">
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full gap-4">
-			{#each visibleGroups as group (group.src)}
-				<div class="relative min-h-[300px]">
-					<div class="flex">
+			{#each visibleGroups as group, i (group.src)}
+				<div class="relative min-h-[300px] border border-[#666]">
+					<div class="flex flex-col items-start gap-2">
+						<div class="z-[1] lg:hidden">
+							<div class="flex items-center">
+								<Switch
+									onCheckedChange={(checked) => {
+										if (checked) {
+											rotatingObjects.push(i);
+											rotatingObjects = rotatingObjects;
+										} else {
+											rotatingObjects = rotatingObjects.filter((val) => val != i);
+										}
+									}} />
+								<p class="p-2 text-sm">Enable Rotation</p>
+							</div>
+						</div>
 						<div class="bg-white rounded-lg">
 							<div class="flex">
 								<Copy src={group.src} />
 							</div>
 						</div>
 					</div>
-					<div bind:this={group['el']} class="absolute top-0 left-0 w-full h-full" />
+					<div
+						bind:this={group['el']}
+						class="absolute top-0 left-0 w-full h-full {rotatingObjects.includes(i)
+							? ''
+							: 'pointer-events-none'} lg:pointer-events-auto" />
 				</div>
 			{/each}
 			{#if !doneLoading}
