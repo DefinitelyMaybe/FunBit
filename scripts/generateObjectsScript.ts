@@ -20,7 +20,7 @@ for (let i = 0; i < names.length; i++) {
 
 	outputString += `import ${name} from '${importPath}/${path}'\n`;
 	outputString += `import ${name}SRC from '${importPath}/${path}?raw'\n`;
-	outputStringPart2 += `{ el: undefined, obj: ${name}, src: ${name}SRC },\n`;
+	outputStringPart2 += `{ id: ${i}, el: undefined, obj: ${name}, src: ${name}SRC },\n`;
 }
 
 const output =
@@ -29,6 +29,7 @@ const output =
 	'\n\nexport default [\n' +
 	outputStringPart2 +
 	`] as {
+	id: number;
 	el: HTMLElement | undefined;
 	obj: any;
 	src: string;

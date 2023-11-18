@@ -17,7 +17,7 @@
 <div class="min-h-screen relative">
 	<div class="absolute flex flex-col w-full h-full">
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full gap-4">
-			{#each visibleGroups as group, i (group.src)}
+			{#each visibleGroups as group, i (group.id)}
 				<div class="relative min-h-[300px] border border-[#666]">
 					<div class="flex flex-col items-start gap-2">
 						<div class="z-[1] lg:hidden">
@@ -74,7 +74,7 @@
 	</div>
 	<div class="fixed w-full h-full top-0 left-0 z-[-1]">
 		<Canvas>
-			{#each visibleGroups as group, i}
+			{#each visibleGroups as group (group.id)}
 				<View element={group.el}>
 					<Scene element={group.el} bind:callAPI={group.callAPI}>
 						<svelte:component this={group.obj} />
