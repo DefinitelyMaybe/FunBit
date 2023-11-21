@@ -1,17 +1,17 @@
 export const convertedAssets = [
 	{
-		title: 'Ultimate Stylized Nature Pack',
-		url: '/ultimate-stylized-nature',
-		imgSrc: '/quaternius/ultimatestylizednature.jpg',
-		imgAlt: 'ultimate stylized nature pack',
-		tags: ['Ultimate', 'Trees', 'Nature']
-	},
-	{
 		title: 'Cube World Kit',
 		url: '/cube-world',
 		imgSrc: '/quaternius/cubeworld.jpg',
 		imgAlt: 'preview',
 		tags: ['Game Kit', 'Cube']
+	},
+	{
+		title: 'Ultimate Stylized Nature Pack',
+		url: '/ultimate-stylized-nature',
+		imgSrc: '/quaternius/ultimatestylizednature.jpg',
+		imgAlt: 'ultimate stylized nature pack',
+		tags: ['Ultimate', 'Trees', 'Nature']
 	}
 ];
 export const workinprogressAssets = [
