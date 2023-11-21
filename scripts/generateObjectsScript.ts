@@ -2,7 +2,7 @@
 
 import { walk } from 'https://deno.land/std@0.201.0/fs/mod.ts';
 
-const dir = '../src/lib/components/models/Ultimate-Stylized-Nature';
+const dir = '../src/lib/components/models/Cube-World';
 const names = [];
 let outputString = '';
 let outputStringPart2 = '';
@@ -14,17 +14,20 @@ for await (const entry of walk(dir)) {
 }
 
 const importPath = dir.replace('../src/', '$');
+
 for (let i = 0; i < names.length; i++) {
-	const path = names[i].name;
+	const path = names[i].path.replace(/\\/g, '/').replace(dir, '');
 	const name = names[i].name.split('.')[0];
 
-	outputString += `import ${name} from '${importPath}/${path}'\n`;
-	outputString += `import ${name}SRC from '${importPath}/${path}?raw'\n`;
+	console.log(path);
+
+	outputString += `import ${name} from '${importPath}${path}'\n`;
+	outputString += `import ${name}SRC from '${importPath}${path}?raw'\n`;
 	outputStringPart2 += `{ id: ${i}, el: undefined, obj: ${name}, src: ${name}SRC },\n`;
 }
 
 const output =
-	'// This is a generated list of imports and exports\n' +
+	'// This is a generated list of imports and exports from generateObjectsScript.ts\n' +
 	outputString +
 	'\n\nexport default [\n' +
 	outputStringPart2 +

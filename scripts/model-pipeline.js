@@ -13,7 +13,7 @@ const configuration = {
 	sourceDir: resolve(join('static', 'models')),
 	targetDir: resolve(join('src', 'lib', 'components', 'models')),
 	overwrite: false,
-	root: '/Ultimate-Stylized-Nature/',
+	root: '/Cube-World/',
 	types: true,
 	keepnames: false,
 	meta: false,

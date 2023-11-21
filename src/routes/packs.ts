@@ -5,16 +5,16 @@ export const convertedAssets = [
 		imgSrc: '/quaternius/ultimatestylizednature.jpg',
 		imgAlt: 'ultimate stylized nature pack',
 		tags: ['Ultimate', 'Trees', 'Nature']
-	}
-];
-export const workinprogressAssets = [
+	},
 	{
 		title: 'Cube World Kit',
-		url: '/',
+		url: '/cube-world',
 		imgSrc: '/quaternius/cubeworld.jpg',
 		imgAlt: 'preview',
 		tags: ['Game Kit', 'Cube']
-	},
+	}
+];
+export const workinprogressAssets = [
 	{
 		title: 'Sushi Restaurant Kit',
 		url: '/',
