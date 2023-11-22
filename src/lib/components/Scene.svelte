@@ -48,4 +48,4 @@
 	<slot />
 </Bounds>
 
-<Grid sectionColor={'#666'} infiniteGrid />
+<Grid sectionColor={'#666'} />

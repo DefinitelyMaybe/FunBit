@@ -25,7 +25,7 @@
 	<div class="absolute flex flex-col w-full h-full">
 		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 h-full gap-4">
 			{#each visibleAssets as group, i (group.id)}
-				<div class="relative min-h-[300px] border border-[#666]">
+				<div class="relative min-h-[300px] border border-[#666] rounded-lg shadow-lg">
 					<div class="flex flex-col items-start gap-2">
 						<div class="z-[1] lg:hidden">
 							<div class="flex items-center">

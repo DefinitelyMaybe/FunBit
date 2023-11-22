@@ -8,8 +8,14 @@
 </script>
 
 <div class="flex text-[#333] relative {WIP ? 'cursor-not-allowed' : ''}">
-	<a href={url} class="bg-[#d1d1d1] rounded-xl overflow-clip flex flex-col grow">
-		<img src={imgSrc} alt={imgAlt} class="" />
+	<a
+		href={url}
+		class="bg-[#d1d1d1] rounded-xl overflow-clip flex flex-col grow shadow-lg shadow-gray-600">
+		{#if imgSrc}
+			<img src={imgSrc} alt={imgAlt} />
+		{:else}
+			<slot />
+		{/if}
 		<div class="px-4 py-2 flex flex-col justify-between">
 			<h1 class="flex items-center text-2xl">{title}</h1>
 			<div class="flex">
