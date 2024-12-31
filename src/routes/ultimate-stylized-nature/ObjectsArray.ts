@@ -1,3 +1,4 @@
+// This is a generated list of imports and exports from generateObjectsScript.ts
 import BirchTree_1 from '$lib/components/models/Ultimate-Stylized-Nature/BirchTree_1.svelte';
 import BirchTree_1SRC from '$lib/components/models/Ultimate-Stylized-Nature/BirchTree_1.svelte?raw';
 import BirchTree_2 from '$lib/components/models/Ultimate-Stylized-Nature/BirchTree_2.svelte';

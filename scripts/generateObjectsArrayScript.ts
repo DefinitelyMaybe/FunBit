@@ -1,8 +1,8 @@
 //// <reference path="./deno.d.ts" />
 
-import { walk } from 'https://deno.land/std@0.201.0/fs/mod.ts';
+import { walk } from 'jsr:@std/fs';
 
-const dir = '../src/lib/components/models/Cube-World';
+const dir = 'src/lib/components/models/Ultimate-Stylized-Nature/';
 const names = [];
 let outputString = '';
 let outputStringPart2 = '';

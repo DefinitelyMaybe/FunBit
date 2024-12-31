@@ -1,51 +1,56 @@
 <script lang="ts">
-	import { writable } from 'svelte/store';
-	import { T, useThrelte, useThrelteUserContext } from '@threlte/core';
-	import { Grid } from '@threlte/extras';
-	import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-	import Bounds from '$lib/components/Bounds.svelte';
-	import { onMount } from 'svelte';
+	import { T, useThrelte } from '@threlte/core';
+	import { Grid, Suspense } from '@threlte/extras';
+	import CameraControls from './CameraControls.svelte';
+	import { Group, type Mesh, PerspectiveCamera, Vector3 } from 'three';
 
-	export let element: HTMLElement;
-	export const callAPI = () => {
-		setTimeout(() => {
-			if (api) {
-				api.refresh().fit();
-			}
-		}, 500);
-	};
+	interface Props {
+		mesh?: Mesh;
+		children: import('svelte').Snippet;
+	}
 
-	const ref = writable(undefined);
-	let api;
+	let { children }: Props = $props();
+	const { dom } = useThrelte();
 
-	const { camera } = useThrelte();
-	const getCtx = () => {
-		return { orbitControls: ref };
-	};
+	const camera = new PerspectiveCamera();
+	const controls = new CameraControls(camera, dom);
+	controls.maxPolarAngle = 1.7;
 
-	useThrelteUserContext('threlte-controls', getCtx);
-
-	onMount(() => {
-		callAPI();
-	});
+	const container = new Group();
 </script>
 
-<T.PerspectiveCamera makeDefault position={[5, 5, 5]}>
-	{#if element}
-		<T
-			is={OrbitControls}
-			bind:ref={$ref}
-			args={[camera.current, element]}
-			maxPolarAngle={1.55}
-			enableZoom={false} />
-	{/if}
-</T.PerspectiveCamera>
+<T is={camera} makeDefault />
 
 <T.DirectionalLight position={[1, 1, 1]} />
-<T.AmbientLight />
+<T.AmbientLight intensity={0.75} />
 
-<Bounds bind:api>
-	<slot />
-</Bounds>
+<Suspense
+	onload={() => {
+		let mesh: Mesh;
+		let count = 0;
+		container.traverse((obj) => {
+			if (obj?.isMesh) {
+				count += 1;
+				if (count == 1) {
+					mesh = obj;
+				}
+			}
+		});
+		if (mesh) {
+			mesh.geometry.computeBoundingBox();
+			const x = mesh.geometry.boundingBox?.getSize(new Vector3());
+
+			controls.fitToBox(mesh, false); //, { cover: false, paddingBottom: 0.05, paddingTop: 0.05 }
+			const dist = controls.distance;
+			controls.setLookAt(0, dist, dist, 0, x!.y / 2, 0);
+		} else {
+			controls.setLookAt(5, 5, 5, 0, 0, 0);
+		}
+	}}
+>
+	<T is={container}>
+		{@render children?.()}
+	</T>
+</Suspense>
 
 <Grid sectionColor={'#666'} />

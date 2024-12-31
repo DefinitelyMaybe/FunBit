@@ -1,0 +1,45 @@
+{
+  "version": "4",
+  "specifiers": {
+    "jsr:@std/fs@*": "1.0.8",
+    "jsr:@std/path@^1.0.8": "1.0.8"
+  },
+  "jsr": {
+    "@std/fs@1.0.8": {
+      "integrity": "161c721b6f9400b8100a851b6f4061431c538b204bb76c501d02c508995cffe0",
+      "dependencies": [
+        "jsr:@std/path"
+      ]
+    },
+    "@std/path@1.0.8": {
+      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
+    }
+  },
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@sveltejs/adapter-node@^5.2.9",
+        "npm:@sveltejs/kit@2",
+        "npm:@sveltejs/vite-plugin-svelte@^5.0.3",
+        "npm:@tailwindcss/container-queries@~0.1.1",
+        "npm:@threlte/core@8.0.0-next.37",
+        "npm:@threlte/extras@9.0.0-next.50",
+        "npm:@types/three@0.171",
+        "npm:autoprefixer@^10.4.20",
+        "npm:camera-controls@^2.9.0",
+        "npm:github-markdown-css@^5.8.1",
+        "npm:mdsvex@~0.12.3",
+        "npm:prettier-plugin-svelte@^3.2.6",
+        "npm:prettier-plugin-tailwindcss@~0.6.5",
+        "npm:prettier@^3.3.2",
+        "npm:svelte-check@4",
+        "npm:svelte-markdown@~0.4.1",
+        "npm:svelte@^5.15.0",
+        "npm:tailwindcss@^3.4.9",
+        "npm:three@0.171",
+        "npm:typescript@5",
+        "npm:vite@^6.0.5"
+      ]
+    }
+  }
+}
