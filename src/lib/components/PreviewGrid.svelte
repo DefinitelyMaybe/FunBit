@@ -23,15 +23,10 @@
 
 <div class="relative min-h-screen">
 	<div class="absolute flex h-full w-full flex-col">
-		<div class="grid h-full grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+		<div class="mx-8 grid h-full grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
 			{#each visibleAssets as asset (asset.id)}
 				<div class="relative min-h-[300px] rounded-lg border border-[#666] shadow-lg">
 					<div class="flex flex-col items-start gap-2">
-						<div class="lg:hidden">
-							<div class="flex items-center">
-								<p class="p-2 text-sm">Enable Rotation</p>
-							</div>
-						</div>
 						<div class="z-[2] rounded-lg bg-white">
 							<div class="flex">
 								<Copy src={asset.src} />
