@@ -12,7 +12,6 @@
 		"lint": "prettier --check ."
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-node": "^5.2.9",
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^5.0.3",
 		"@types/three": "^0.171.0",
@@ -29,6 +28,7 @@
 		"vite": "^6.0.5"
 	},
 	"dependencies": {
+		"@sveltejs/adapter-vercel": "^5.5.2",
 		"@threlte/core": "8.0.0-next.38",
 		"@threlte/extras": "9.0.0-next.51",
 		"camera-controls": "^2.9.0",
