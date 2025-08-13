@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { T, useThrelte } from '@threlte/core';
-	import { Grid, Suspense } from '@threlte/extras';
-	import CameraControls from './CameraControls.svelte';
-	import { Group, type Mesh, PerspectiveCamera, Vector3 } from 'three';
+	import { T } from '@threlte/core';
+	import { Grid, Suspense, CameraControls, type CameraControlsRef } from '@threlte/extras';
+	import { Group, type Mesh, Vector3 } from 'three';
 
 	interface Props {
 		mesh?: Mesh;
@@ -10,16 +9,15 @@
 	}
 
 	let { children }: Props = $props();
-	const { dom } = useThrelte();
 
-	const camera = new PerspectiveCamera();
-	const controls = new CameraControls(camera, dom);
-	controls.maxPolarAngle = 1.7;
+	let controller = $state<CameraControlsRef>();
 
 	const container = new Group();
 </script>
 
-<T is={camera} makeDefault />
+<T.PerspectiveCamera makeDefault>
+	<CameraControls bind:ref={controller} maxPolarAngle={1.7} />
+</T.PerspectiveCamera>
 
 <T.DirectionalLight position={[1, 1, 1]} />
 <T.AmbientLight intensity={0.75} />
@@ -40,11 +38,11 @@
 			mesh.geometry.computeBoundingBox();
 			const x = mesh.geometry.boundingBox?.getSize(new Vector3());
 
-			controls.fitToBox(mesh, false); //, { cover: false, paddingBottom: 0.05, paddingTop: 0.05 }
-			const dist = controls.distance;
-			controls.setLookAt(0, dist, dist, 0, x!.y / 2, 0);
+			controller?.fitToBox(mesh, false); //, { cover: false, paddingBottom: 0.05, paddingTop: 0.05 }
+			const dist = controller!.distance;
+			controller?.setLookAt(0, dist, dist, 0, x!.y / 2, 0);
 		} else {
-			controls.setLookAt(5, 5, 5, 0, 0, 0);
+			controller?.setLookAt(5, 5, 5, 0, 0, 0);
 		}
 	}}
 >
