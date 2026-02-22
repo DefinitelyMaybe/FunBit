@@ -29,7 +29,7 @@
 		"vite": "^7.1.11"
 	},
 	"dependencies": {
-		"@sveltejs/adapter-vercel": "^5.8.2",
+		"@sveltejs/adapter-vercel": "^6.3.2",
 		"@threlte/core": "8.1.4",
 		"@threlte/extras": "9.4.4",
 		"svelte-markdown": "^0.4.1",
