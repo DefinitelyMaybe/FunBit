@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@threlte/core':
-        specifier: 8.1.4
-        version: 8.1.4(svelte@5.56.8)(three@0.179.1)
+        specifier: 8.5.16
+        version: 8.5.16(svelte@5.56.8)(three@0.179.1)
       '@threlte/extras':
-        specifier: 9.4.4
-        version: 9.4.4(@types/three@0.179.0)(svelte@5.56.8)(three@0.179.1)
+        specifier: 9.21.0
+        version: 9.21.0(@types/three@0.179.0)(svelte@5.56.8)(three@0.179.1)
       svelte-markdown:
         specifier: ^0.4.1
         version: 0.4.1(svelte@5.56.8)
@@ -505,14 +505,14 @@ packages:
     peerDependencies:
       three: '>=0.170.0'
 
-  '@threlte/core@8.1.4':
-    resolution: {integrity: sha512-zeZS49roWpWhqHkMAcTqg60IbjX2d7NHPg4ww+sKChMBRL2J4MNTQp7Gm4U14RpQeEXFR9itOaPfqMwr93dPMQ==}
+  '@threlte/core@8.5.16':
+    resolution: {integrity: sha512-+aa9Zgz0/Qat82H0hTm1pTEtS2BIP1Nfu7pKaei+3+TvDqER0YnZ4hdgI9fYU9Z5r1lrzY3JxMyrdISp4B0kfw==}
     peerDependencies:
       svelte: '>=5'
       three: '>=0.160'
 
-  '@threlte/extras@9.4.4':
-    resolution: {integrity: sha512-GeTHFAaAaR3a4JO0KJaMiYueUlGixYyQgDf+09z14kvSMrlGXL/fZCD0172u6o6uoQNLFei5TjrIxytcJLbrQw==}
+  '@threlte/extras@9.21.0':
+    resolution: {integrity: sha512-ZkBx4IH+7vcxVM09Rex9XJNMKKbQt4JZ5J/3TnBd/Fge8IzSgl0ydgn70riDf/8tDLMDID6VdZPPrlr5vCHHJA==}
     peerDependencies:
       svelte: '>=5'
       three: '>=0.160'
@@ -709,8 +709,9 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
 
-  camera-controls@2.10.1:
-    resolution: {integrity: sha512-KnaKdcvkBJ1Irbrzl8XD6WtZltkRjp869Jx8c0ujs9K+9WD+1D7ryBsCiVqJYUqt6i/HR5FxT7RLASieUD+Q5w==}
+  camera-controls@3.1.2:
+    resolution: {integrity: sha512-xkxfpG2ECZ6Ww5/9+kf4mfg1VEYAoe9aDSY+IwF0UEs7qEzwy0aVRfs2grImIECs/PoBtWFrh7RXsQkwG922JA==}
+    engines: {node: '>=22.0.0', npm: '>=10.5.1'}
     peerDependencies:
       three: '>=0.126.1'
 
@@ -983,9 +984,6 @@ packages:
 
   meshoptimizer@0.22.0:
     resolution: {integrity: sha512-IebiK79sqIy+E4EgOr+CAw+Ke8hAspXKzBd0JdgEmPHiAwmvEj2S4h1rfvo+o/BnfEYd/jAOg5IeeIjzlzSnDg==}
-
-  mitt@3.0.1:
-    resolution: {integrity: sha512-vKivATfr97l2/QBCYAkXYDbrIWPM2IIKEl7YPhjCvKlG3kE2gm+uBo6nEXK3M5/Ffh/FLpKExzOQ3JJoJGFKBw==}
 
   mri@1.2.0:
     resolution: {integrity: sha512-tzzskb3bG8LvYGFF/mDTpq3jpI6Q9wc3LEmBaghu+DdCssd1FakN7Bc0hVNmEyGq1bq3RgfkCb3cmQLpNPOroA==}
@@ -1591,16 +1589,15 @@ snapshots:
     transitivePeerDependencies:
       - '@types/three'
 
-  '@threlte/core@8.1.4(svelte@5.56.8)(three@0.179.1)':
+  '@threlte/core@8.5.16(svelte@5.56.8)(three@0.179.1)':
     dependencies:
-      mitt: 3.0.1
       svelte: 5.56.8
       three: 0.179.1
 
-  '@threlte/extras@9.4.4(@types/three@0.179.0)(svelte@5.56.8)(three@0.179.1)':
+  '@threlte/extras@9.21.0(@types/three@0.179.0)(svelte@5.56.8)(three@0.179.1)':
     dependencies:
       '@threejs-kit/instanced-sprite-mesh': 2.5.1(@types/three@0.179.0)(three@0.179.1)
-      camera-controls: 2.10.1(three@0.179.1)
+      camera-controls: 3.1.2(three@0.179.1)
       svelte: 5.56.8
       three: 0.179.1
       three-mesh-bvh: 0.9.13(three@0.179.1)
@@ -1738,7 +1735,7 @@ snapshots:
       node-releases: 2.0.51
       update-browserslist-db: 1.2.3(browserslist@4.28.7)
 
-  camera-controls@2.10.1(three@0.179.1):
+  camera-controls@3.1.2(three@0.179.1):
     dependencies:
       three: 0.179.1
 
@@ -1952,8 +1949,6 @@ snapshots:
       vfile-message: 2.0.4
 
   meshoptimizer@0.22.0: {}
-
-  mitt@3.0.1: {}
 
   mri@1.2.0: {}
 
