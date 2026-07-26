@@ -21,9 +21,9 @@ importers:
         specifier: ^0.179.1
         version: 0.179.1
     devDependencies:
-      '@sveltejs/adapter-static':
-        specifier: ^3.0.10
-        version: 3.0.10(@sveltejs/kit@2.70.1(@sveltejs/vite-plugin-svelte@7.2.0(svelte@5.56.8)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))(svelte@5.56.8)(typescript@7.0.2)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))
+      '@deno/svelte-adapter':
+        specifier: ^0.2.1
+        version: 0.2.1(@sveltejs/kit@2.70.1(@sveltejs/vite-plugin-svelte@7.2.0(svelte@5.56.8)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))(svelte@5.56.8)(typescript@7.0.2)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))
       '@sveltejs/kit':
         specifier: ^2.70.1
         version: 2.70.1(@sveltejs/vite-plugin-svelte@7.2.0(svelte@5.56.8)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))(svelte@5.56.8)(typescript@7.0.2)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1))
@@ -71,6 +71,14 @@ importers:
         version: 8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)
 
 packages:
+
+  '@deno/experimental-route-config@0.0.5':
+    resolution: {integrity: sha512-0PN4qij3sC3Qm8WbiOBGlOQz8WtB0AENGkzsTHOYyPenf40iW7OGFid8QT3L8lGApnz3t6ufET0c2XgagV8Jjw==}
+
+  '@deno/svelte-adapter@0.2.1':
+    resolution: {integrity: sha512-jVdTaq9FwuYpOehCsiVmSNz4D/8FzewNSk6apvt1dNonp+MtJm/x5dV2xHVpiHesby2Nw/is7NcBU2NX2PArVQ==}
+    peerDependencies:
+      '@sveltejs/kit': ^2.31.0
 
   '@dimforge/rapier3d-compat@0.12.0':
     resolution: {integrity: sha512-uekIGetywIgopfD97oDL5PfeezkFpNhwlzlaEYNOA0N6ghdsOvh/HYjSMek5Q2O1PYvRSDFcqFVJl4r4ZBwOow==}
@@ -373,11 +381,6 @@ packages:
     resolution: {integrity: sha512-LFuZUkjJ9iF7JZye/aG5XM0SFcQ5VyL0oVX4WJ9dc0Va3R3s0OauX1BESVCb+YN/ol8TAfqGDDAQsTG627Y5kw==}
     peerDependencies:
       acorn: ^8.9.0
-
-  '@sveltejs/adapter-static@3.0.10':
-    resolution: {integrity: sha512-7D9lYFWJmB7zxZyTE/qxjksvMqzMuYrrsyh1f4AlZqeZeACPRySjbC3aFiY55wb1tWUaKOQG9PVbm74JcN2Iew==}
-    peerDependencies:
-      '@sveltejs/kit': ^2.0.0
 
   '@sveltejs/kit@2.70.1':
     resolution: {integrity: sha512-nY9SPHGOZro3doud9vZXDBwl9tCZIouuJztjgSHs6PAIrv9M/z5O7eOhPV5xU7CgVHA976Jwu3BA1hIFvXztkA==}
@@ -1225,6 +1228,9 @@ packages:
     peerDependencies:
       browserslist: '>= 4.21.0'
 
+  urlpattern-polyfill@10.1.0:
+    resolution: {integrity: sha512-IGjKp/o0NL3Bso1PymYURCJxMPNAf/ILOpendP9f5B6e1rTJgdgiOvgfoT8VxCAdY+Wisb9uhGaJJf3yZ2V9nw==}
+
   vfile-message@2.0.4:
     resolution: {integrity: sha512-DjssxRGkMvifUOJre00juHoP9DPWuzjxKuMDrhNbk2TdaYYBNMStsNhEOt3idrtI12VQYM/1+iM0KOzXi4pxwQ==}
 
@@ -1291,6 +1297,15 @@ packages:
     resolution: {integrity: sha512-B58NGBEoc8Y9MWWCQGl/gq9xBCe4IiKM0a2x7GZdQKOW5Exr8S1W24J6OgM1njK8xCRGvAJIL/MxXHf6SkmQKQ==}
 
 snapshots:
+
+  '@deno/experimental-route-config@0.0.5':
+    dependencies:
+      urlpattern-polyfill: 10.1.0
+
+  '@deno/svelte-adapter@0.2.1(@sveltejs/kit@2.70.1(@sveltejs/vite-plugin-svelte@7.2.0(svelte@5.56.8)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))(svelte@5.56.8)(typescript@7.0.2)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))':
+    dependencies:
+      '@deno/experimental-route-config': 0.0.5
+      '@sveltejs/kit': 2.70.1(@sveltejs/vite-plugin-svelte@7.2.0(svelte@5.56.8)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))(svelte@5.56.8)(typescript@7.0.2)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1))
 
   '@dimforge/rapier3d-compat@0.12.0': {}
 
@@ -1474,10 +1489,6 @@ snapshots:
   '@sveltejs/acorn-typescript@1.0.11(acorn@8.17.0)':
     dependencies:
       acorn: 8.17.0
-
-  '@sveltejs/adapter-static@3.0.10(@sveltejs/kit@2.70.1(@sveltejs/vite-plugin-svelte@7.2.0(svelte@5.56.8)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))(svelte@5.56.8)(typescript@7.0.2)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))':
-    dependencies:
-      '@sveltejs/kit': 2.70.1(@sveltejs/vite-plugin-svelte@7.2.0(svelte@5.56.8)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))(svelte@5.56.8)(typescript@7.0.2)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1))
 
   '@sveltejs/kit@2.70.1(@sveltejs/vite-plugin-svelte@7.2.0(svelte@5.56.8)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1)))(svelte@5.56.8)(typescript@7.0.2)(vite@8.1.5(esbuild@0.28.1)(jiti@2.7.0)(yaml@2.8.1))':
     dependencies:
@@ -2164,6 +2175,8 @@ snapshots:
       browserslist: 4.28.7
       escalade: 3.2.0
       picocolors: 1.1.1
+
+  urlpattern-polyfill@10.1.0: {}
 
   vfile-message@2.0.4:
     dependencies:
