@@ -10,7 +10,7 @@ export const convertedAssets = [
 export const workinprogressAssets = [
 	{
 		title: 'Cube World Kit',
-		url: '/cube-world',
+		url: '/',
 		imgSrc: '/quaternius/cubeworld.jpg',
 		imgAlt: 'preview',
 		tags: ['Game Kit', 'Cube']
