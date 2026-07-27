@@ -15,10 +15,7 @@ const config = {
 		adapter: adapter({
 			pages: 'build',
 			assets: 'build'
-		}),
-		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/your-repo-name' : ''
-		}
+		})
 	},
 
 	extensions: ['.svelte', '.svx']
